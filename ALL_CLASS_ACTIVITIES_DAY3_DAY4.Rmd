@@ -1,0 +1,305 @@
+## ADVENTIST UNIVERSITY OF CENTRAL AFRICA_RWANDA
+<center><H3> R for DATA SCIENCE</H3> </center>
+# STUDENT NAMES_ID: Erneste UWIMPUHWE_101414
+# LECTURER:
+# Dr.Pacifique Nizeyimana
+# DATE 17/10/2025
+<h3>class one Task</h3>
+
+# DAY3_DAY4_PRACTICAL_ACTIVITIES_IN_R
+
+# summary of ACTIVITIES
+## Here below is summary of key points I have covered in day3&day 4 Class 
+### Regression analysis is a statistical approach for modeling the relationship between a dependent variable (response/outcome) and one or more independent variables (explanatory/inputs), yielding an equation for prediction. Diverse methodologies address different data types and structures. Simple, Multiple, and Polynomial Linear Regression predict a quantitative response based on one or more quantitative inputs, with polynomial allowing for curvature. Logistic and Poisson Regression are used for non-quantitative responses, specifically categorical outcomes and count data, respectively. More specialized types include Cox Proportional Hazards for time-to-event data, Multilevel for hierarchical data, and Multivariate for multiple response variables. Nonlinear, Nonparametric, and Robust Regression offer flexible modeling for non-linear relationships, data-driven model forms, and resistance to influential outliers.
+# Fitting regression models with lm()
+## Simple linear regression
+```{r}
+data("women")
+fit<-lm(weight~height, data=women)
+summary(fit)
+```
+
+```{r}
+women$weight
+```
+
+```{r}
+fitted(fit)
+```
+
+```{r}
+residuals(fit)
+```
+
+```{r}
+plot(women$height,women$weight,xlab="Height (in inches)",ylab="Weight
+(in pounds)")
+abline(fit)
+```
+
+#Polynomial regression
+```{r}
+fit2<- lm(weight~height+I(height^2), data=women)
+summary(fit2)
+```
+
+```{r}
+plot(women$height,women$weight,xlab="Height (in inches)",ylab="Weight
+(in pounds)")
+lines(women$height,fitted(fit2))
+```
+#Regression diagnostics
+```{r}
+fit<- lm(weight~height,data=women)
+par(mfrow=c(2,2))
+plot(fit)
+```
+
+```{r}
+fit2<- lm(weight~height+I(height^2), data=women)
+par(mfrow=c(2,2))
+plot(fit2)
+```
+
+```{r}
+newfit<-lm(weight~height+I(height^2),data=women[-c(13,15),])
+par(mfrow=c(2,2))
+plot(newfit)
+```
+# Selecting the best regression model
+```{r}
+plot(mpg~wt,data=mtcars)
+model<- lm(mpg~wt, data=mtcars)
+#plot(model)
+abline(model)
+```
+
+```{r}
+summary(model)
+```
+
+```{r}
+predict(model,newdata=data.frame(wt=6))
+```
+# Simulation in R
+### Simulation is an important (and big) topic for both statistics and for a variety ofother areas where there is a need to introduce randomness. Sometimes you want toimplement a statistical procedure that requires random number generation orsample (i.e. Markov chain Monte Carlo, the bootstrap, random forests, bagging) andsometimes you want to simulate a system and random number generators can beused to model random inputs
+```{r}
+x <- rnorm(10)
+pnorm(2)
+```
+
+```{r}
+x <- rnorm(10, 20, 2)
+```
+
+# Setting the random number seed
+### When simulating any random numbers it is essential to set the random number seed. Setting the random number seed with set.seed() ensures reproducibility of thesequence of random numbers.
+
+```{r}
+set.seed(1)
+rnorm(5)
+```
+
+```{r}
+rnorm(5)
+```
+
+```{r}
+set.seed(1)
+```
+# Simulaton a linear model
+```{r}
+set.seed(20)
+```
+
+# Simulate predictor variable
+```{r}
+x <- rnorm(100)
+```
+
+# Simulate the error term
+```{r}
+e <- rnorm(100, 0, 2)
+```
+
+## Compute the outcome via the model
+```{r}
+y <- 0.5 - 2 * x + e
+plot(x, y)
+```
+
+```{r}
+set.seed(1)
+sample(1:10, 4)
+
+```
+```{r}
+sample(1:10, 4)
+```
+# Doesn't have to be numbers
+```{r}
+sample(letters, 5)
+```
+# Do a random permutation
+```{r}
+sample(1:10)
+```
+
+```{r}
+sample(1:10)
+```
+
+#Sample w/replacement
+```{r}
+sample(1:10, replace = TRUE)
+```
+# Data Visualization
+```{r}
+country<-c("Australia", "Austria", "Belgium","Canada",
+"Denmark", "Finland","France","Germany",
+"Greece","Ireland","Italy","Japan", "Netherland",
+"New Zealand", "Norway", "Portugal", "Spain","Sweden",
+"Switzerland","UK","USA")
+Income.inequality<-c(7.0,4.8,4.6,5.6,4.3,3.7,5.6,5.2,6.2,6.0,6.7,3.4,5.3,6.8,3.9,8.0,5.5,4.0,5.7,7.2,8.6)
+Index.HS<-c(0.07,0.01,-0.23,-0.07,-0.19,-0.43,0.05,-0.06,0.38,0.25,-0.12,-1.26,-0.51,0.29,-0.63,1.18,-0.30,-0.83,-0.46,0.79,2.02)
+GDP_WB<-c(45926,47682,43435,45066,45537,30676,39328,46401,26851,49393,35463,36319,48253,37679,65615
+,28760,33629,45297,59540,40233,54630)
+data.21<-data.frame(country,Income.inequality,Index.HS,GDP_WB)
+plot(data.21[c("Income.inequality","Index.HS")])
+```
+
+```{r}
+Index_inequality.df<-data.21[c("Income.inequality","Index.HS")]
+str(Index_inequality.df)
+## 'data.frame': 21 obs. of 2 variables:
+## $ Income.inequality: num 7 4.8 4.6 5.6 4.3 3.7 5.6 5.2 6.2 6 ...
+## $ Index.HS : num 0.07 0.01 -0.23 -0.07 -0.19 -0.43 0.05 -0.06 0.38 0.25 ...
+(country<-data.21[,"country"])
+## [1] "Australia" "Austria" "Belgium" "Canada" "Denmark"
+## [6] "Finland" "France" "Germany" "Greece" "Ireland"
+## [11] "Italy" "Japan" "Netherland" "New Zealand" "Norway"
+## [16] "Portugal" "Spain" "Sweden" "Switzerland" "UK"
+## [21] "USA"
+(country.2<-data.21["country"])
+## country
+## 1 Australia
+## 2 Austria
+## 3 Belgium
+## 4 Canada
+## 5 Denmark
+```
+```{r}
+str(country)
+```
+```{r}
+str(country.2)
+```
+```{r}
+plot(Index_inequality.df,pch=20)
+text(Index_inequality.df,labels=country)
+```
+```{r}
+plot(Index_inequality.df,pch=20)
+text(Index_inequality.df,labels=country,pos=1)
+```
+```{r}
+plot(Index_inequality.df,pch=20)
+text(Index_inequality.df,labels=country,pos=2)
+```
+```{r}
+plot(Index_inequality.df,pch=20)
+text(Index_inequality.df,labels=country,pos=3)
+```
+```{r}
+plot(Index_inequality.df,pch=20)
+text(Index_inequality.df,labels=country,pos=4)
+```
+```{r}
+plot(Index_inequality.df,pch=20)
+text(Index_inequality.df,labels=country,pos=4,cex=0.8)
+```
+```{r}
+which(country %in% c("Austria","Denmark","Germany","Netherland"))
+## [1] 2 5 8 13
+text.left<-which(country %in% c("Austria","Denmark","Germany","Netherla
+nd"))
+text.left
+## [1] 2 5 8 13
+text.right<-setdiff(1:nrow(data.21),text.left)
+text.right
+## [1] 1 3 4 6 7 9 10 11 12 14 15 16 17 18 19 20 21
+pos.text<-ifelse(1:nrow(data.21)%in% text.left,2,4)
+plot(Index_inequality.df,pch=20,col="red",xlim=c(3,9),ylim=c(-1.5,2.5))
+text(Index_inequality.df,labels=country,pos=pos.text,cex=0.8)
+```
+
+```{r}
+which(country %in% "Germany")
+## [1] 8
+text.up<-which(country %in% "Germany")
+text.up
+## [1] 8
+text.left<-setdiff(1:nrow(data.21),c(text.right,text.up))
+text.left
+## [1] 2 5 13
+pos.text<-ifelse(1:nrow(data.21) %in% text.up,3,ifelse(1:nrow(data.21)%in% text.left,2,4))
+plot(Index_inequality.df,pch=20,col="red",xlim=c(3,9),ylim=c(-1.5,2.5),
+ann=FALSE)
+text(Index_inequality.df,labels = country,pos=pos.text,cex=0.8)
+main.title<-"Income inequality vs Index of Health and Social problems"
+x.lab<-"Income inequality (5th Ratio)"
+y.lab<-"Index of Health and Social problems"
+title(main=main.title,xlab=x.lab,ylab=y.lab)
+```
+```{r}
+plot(Index_inequality.df,pch=20,col="red",xlim=c(3,9),ylim=c(-1.5,2.5),
+ann=FALSE)
+text(Index_inequality.df,labels = country,pos=pos.text,cex=0.8)
+main.title<-"Income inequality vs Index of Health and Social problems"
+x.lab<-"Income inequality (5th Ratio)"
+y.lab<-"Index of Health and Social problems"
+title(main=main.title,xlab=x.lab,ylab=y.lab)
+mtext(c("Better","Worse"),side=2,at=c(-1.8,2.8),las=1)
+```
+```{r}
+plot(Index_inequality.df,pch=20,col="red",xlim=c(3,9),ylim=c(-1.5,2.5),
+ann=FALSE)
+text(Index_inequality.df,labels = country,pos=pos.text,cex=0.8)
+main.title<-"Income inequality vs Index of Health and Social problems"
+x.lab<-"Income inequality (5th Ratio)"
+y.lab<-"Index of Health and Social problems"
+title(main=main.title,xlab=x.lab,ylab=y.lab)
+mtext(c("Better","Worse"),side=2,at=c(-1.8,2.8),las=1)
+text(x=5,y=1.5,labels=paste("r=",round(cor(Index_inequality.df[1],Index_inequality.df[2]),digits=2)))
+```
+```{r}
+plot(Index_inequality.df,pch=20,col="red",xlim=c(3,9),ylim=c(-1.5,2.5),
+ann=FALSE)
+text(Index_inequality.df,labels = country,pos=pos.text,cex=0.8)
+main.title<-"Income inequality vs Index of Health and Social problems"
+x.lab<-"Income inequality (5th Ratio)"
+y.lab<-"Index of Health and Social problems"
+title(main=main.title,xlab=x.lab,ylab=y.lab)
+mtext(c("Better","Worse"),side=2,at=c(-1.8,2.8),las=1)
+text(x=5,y=1.5,labels=paste("r=",round(cor(Index_inequality.df[1],Index_inequality.df[2]),digits=2)))
+lm.ineq<-lm(Index.HS~Income.inequality,data=Index_inequality.df)
+abline(lm.ineq$coef,col="blue")
+```
+```{r}
+rm(list=ls(all=TRUE))
+###set.seed(1002)
+n <-30 ## number of observations
+M <- 1 ## number of pathways
+p<-5
+z <- matrix(runif(n * p, 0, 1), nrow=n, ncol=p)
+x <- 3*cos(z[, 1]) + 2*rnorm(n)
+x<-as.matrix(x)
+beta.true <- rep(1,ncol(x))
+## pathway-response function
+hfun1 <- function(zvec) (10*cos(zvec[1]) - 15*(zvec[2])^2+10*exp(-zvec
+[3])*zvec[4]-8*sin(zvec[5])*cos(zvec[3])+20*(zvec[1]*zvec[5]))
+h1 <- apply(z, 1, hfun1) ## only depends on z1,z2,z3,z4,z5
+eps <- rnorm(n)
+y <-x * beta.true + h1+ eps
+```
+

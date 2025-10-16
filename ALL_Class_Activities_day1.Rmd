@@ -1,0 +1,307 @@
+
+## ADVENTIST UNIVERSITY OF CENTRAL AFRICA_RWANDA
+<center><H3> R for DATA SCIENCE</H3> </center>
+# STUDENT NAMES_ID: Erneste UWIMPUHWE_101414
+# LECTURER:
+# Dr.Pacifique Nizeyimana
+# DATE 17/10/2025
+<h3>class one Task</h3>
+
+# DAY1_PRACTICAL_ACTIVITIES_IN_R
+# steps of installing R 
+
+* Download R from the CRAN website based on your operating system
+* Run the installer and follow default setup instructions 
+* Open the R console to verify successful installation  
+* Optionally, install RStudio for a better interface 
+* Test the setup by running a simple R command like 2+2 
+
+# Simple calculator in R
+```{r}
+2+7    #PERORMING ADDITION
+200*14 #PERFORMING MULTIPLICATION
+34/23 # PERFORMING DIVISION
+18-89 #PERFORMING SUBSTARCTION
+
+```
+
+# 3 Data structure (Vectors, Factors, Lists, Data frame, matrix and arrays)
+# 3.1 Vectors
+
+```{r}
+x <- c(0.5, 0.6)
+age<-c(20,35,32,29)
+summary(age)
+```
+# CALCULATING MEAN OF VECTOR
+```{r}
+age<-c(35,24,18,24)
+mean(age)
+```
+# 3.2 Stucture of LOGICAL
+```{r}
+x <- c(TRUE, FALSE)
+x <- c(T, F)
+```
+# 3.3 Stucture of Character
+```{r}
+x <- c("a", "b", "c" )
+class<-c("M","F","F","M")
+```
+
+# 3.4 Stucture of Integer
+```{r}
+
+x <- 9:29
+```
+# 3.6 Stucture of Complex
+```{r}
+x <- c(1+0i, 2+4i)
+```
+
+# Matrix and operation within matrices
+```{r}
+x<- matrix(1:6, nrow = 2, ncol = 3)
+x
+```
+```{r}
+(y<-matrix(1:6, nrow = 3, ncol = 2))
+```
+```{r}
+x%*%y
+```
+# 3.7 list
+```{r}
+x <- list(1, "a", TRUE, 1 + 4i)
+x
+```
+#Factor
+```{r}
+x <- factor(c("yes", "yes", "no", "yes", "no"))
+```
+# Create a vector with NAs in it
+```{r}
+x <- c(1, 2, NA, 10, 3)
+is.na(x)
+```
+```{r}
+x <- c(1, 2, 4, "NA", 5)
+bad <- is.na(x)
+print(bad)
+```
+```{r}
+x[!bad]
+```
+# if there are multiple R objects and you want to take the subset with no missingvalues in any of those object
+```{r}
+x <- c(1, 2, NA, 4, NA, 5)
+y <- c("a", "b", NA, "d", NA, "f")
+good <- complete.cases(x, y)
+good
+```
+# Coercion
+```{r}
+sum(c(TRUE,TRUE,FALSE,FALSE,FALSE))#If a vector only contains logical and numbers, R will convert the logical to numbers, Every true becomes a 1, and every FALSE becomes 0
+```
+# Creating data frame
+```{r}
+studentID<-c(1,2,3,4,5)
+math_score<-c(12,17,10,9,NA)
+gender<-c("M","F","M","M","F")
+it_score<-c(13,18,11,10,19)
+scoredata<-data.frame(studentID,gender,math_score,it_score)
+View(scoredata)
+```
+#Create data from keyboard
+```{r}
+data_class2<-data.frame(height=numeric(0),weight=numeric(0),bmi=numeric(0))
+data_class2<-edit(data_class2)
+```
+
+```{r}
+data_class <- read.table("E:/My documents-erneste/AUCA/R programming/class_data.txt")
+variable.names(data_class)
+```
+```{r}
+head(data_class)
+```
+
+```{r}
+tail(data_class)
+```
+```{r}
+data_class[10:20,]
+```
+```{r}
+summary(data_class$WEIGHT)
+```
+
+```{r}
+length(data_class$WEIGHT)
+```
+```{r}
+data_class[,-1]
+```
+
+```{r}
+data() # list of datasets currently available
+data("airquality")
+variable.names(airquality)
+```
+```{r}
+str(airquality)
+```
+
+
+# Relationship between a categorical and a continuous variable
+```{r}
+data("iris")
+head(iris)
+```
+#Exploration data analysis
+##Examine numerical variable using common summary
+```{r}
+data_class
+```
+```{r}
+summary(data_class$)
+```
+```{r}
+str(data_class)
+```
+#Summary Statistics
+```{r}
+# Convert a 'character' column to 'numeric'
+data_class$V1 <- as.integer(data_class$V1)
+data_class$V2 <- as.integer(data_class$V2)
+
+```
+```{r}
+str(data_class)
+```
+
+```{r}
+summary(data_class$V2)
+```
+```{r}
+apply(data_class,2,mean)
+```
+```{r}
+apply(data_class,2,sd)
+```
+```{r}
+c(mean(data_class$V1),sd(data_class$V2))
+```
+```{r}
+c(mean(data_class$WEIGHT),sd(data_class$WEIGHT))
+```
+
+
+```{r}
+mean(iris$Petal.Length)
+mean(iris$Petal.Length[iris$Species=="setosa"])
+mean(iris$Petal.Length[iris$Species=="versicolor"])
+mean(iris$Petal.Length[iris$Species=="virginica"])
+by(iris$Petal.Length,iris$Species,mean)
+by(iris$Petal.Length,iris$Species,summary)
+```
+# Visualize the differences in continuous variables between categories using Box-and- whisker plot
+```{r}
+boxplot(iris$Sepal.Length~iris$Species,data=iris, main="Comparison")
+```
+# Relationship between two categorical variables
+```{r}
+ucba<-data.frame(UCBAdmissions)
+head(ucba)
+```
+```{r}
+cross<-xtabs(Freq~Gender+Admit,data=ucba)
+(cross<-xtabs(Freq~Gender+Admit,data=ucba))
+```
+```{r}
+prop.table(cross,2)
+```
+
+#Simpson’s paradox
+```{r}
+cross2<-xtabs(Freq~Gender+Admit,data=ucba[ucba$Dept=="A",])
+prop.table(cross2,1)
+```
+# Bar chat
+```{r}
+dat <- read.table(text ="ProdA ProdB ProdC ProdD
+1 110 50 60 70
+2 120 50 80 65", header= TRUE)
+barplot(as.matrix(dat),beside=FALSE,col=c("Red","green"))
+```
+# barplot(as.matrix(dat),beside=TRUE,col=c("gold3","red"))
+```{r}
+dat <- read.table(text = "A B C D E F G
+1 10 80 30 90 70 60 90
+2 20 50 70 50 40 10 40
+3 60 80 80 60 60 30 160
+4 20 40 70 80 20 10 70", header = TRUE)
+barplot(as.matrix(dat))
+```
+# SCATTER PLOT
+
+```{r}
+plot(V2~V1,data=data_class)
+```
+```{r}
+plot(data_class$V1,data_class$V2)
+```
+
+#Linear Models
+```{r}
+
+plot(V2~V1,data=data_class)
+abline(lm(V2~V1,data=data_class)$coefficient)
+```
+```{r}
+data_lm<-lm(V2~V1,data=data_class)
+summary(data_lm)
+```
+
+```{r}
+hist(data_class$V1)
+```
+```{r}
+hist(data_class$V2,col = "blue")
+```
+```{r}
+plot(V2~V1,data=data_class)
+abline(lm(V2~V1,data=data_class)$coefficient)
+lines(lowess(data_class$V1,data_class$WV2),col="blue")
+```
+```{r}
+cor(data_class$V1,data_class$V2)
+```
+```{r}
+attach(data_class)
+(BMI<-V2/(V1/100)^2)
+```
+
+```{r}
+(BMI<-round(V2/(V1/100)^2,digit=2))
+```
+```{r}
+head(cbind(data_class,BMI),n=5)
+```
+```{r}
+new_data_class<-cbind(data_class,BMI)
+tail(cbind(data_class,BMI),n=10)
+```
+
+```{r}
+new_data_class<-cbind(data_class,BMI)
+tail(cbind(data_class,BMI),n=10)
+```
+
+```{r}
+summary(BMI)
+```
+```{r}
+stem(BMI,scale=2)
+```
+
