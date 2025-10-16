@@ -16,7 +16,7 @@
 * Optionally, install RStudio for a better interface 
 * Test the setup by running a simple R command like 2+2 
 
-# Simple calculator in R
+# Simple calculator in R Programming
 ```{r}
 2+7    #PERORMING ADDITION
 200*14 #PERFORMING MULTIPLICATION
