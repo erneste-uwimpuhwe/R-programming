@@ -1,0 +1,619 @@
+## ADVENTIST UNIVERSITY OF CENTRAL AFRICA_RWANDA
+<center><H3> R for DATA SCIENCE</H3> </center>
+# STUDENT NAMES_ID: Erneste UWIMPUHWE_101414
+# LECTURER:
+# Dr.Pacifique Nizeyimana
+# DATE 17/10/2025
+<h3>class one Task</h3>
+
+# DAY2_PRACTICAL_ACTIVITIES_IN_R
+## Data Visualization and Data management
+##### Test to treat data
+```{r}
+data1<- read.table(text="Sept_2022 Oct_2022 Nov_2022 Dec_2022 Jan_2023 Feb_2023 Mar_2023 Apr_2023 May_2023 June_2023
+1 4 6 30 140 67 47 23 39 134 80
+2 10 2 29 164 72 81 28 63 211 132",header=TRUE)
+barplot(as.matrix(data1),main="Confirmed cases Vs Gender",beside=TRUE,col=c("gold3","red"))
+legend("topright", c("Male","Female"),cex = 0.5,bty="n",fill = c("gold3","red"))
+
+```
+```{r}
+data3<- read.table(text="sept_2022 Oct_2022 Nov_2022 Dec_2022 Jan_2023 Feb_2023 Mar_2023 Apr_2023 May_2023 June_2023
+1 867 582 1802 12003 3059 9205 5346 7269 5933 3245
+2 842 436 1805 11785 3508 10908 4902 7883 5901 4646 ",header=TRUE)
+barplot(as.matrix(data3),main=" COVID 19 test Vs Gender",beside=TRUE,col=c("blue","purple"))
+legend("topleft", c("Male","Female"),cex = 1.3,bty="n",fill = c("blue",
+"purple"))
+
+```
+```{r}
+data2<- read.table(text="Sept_2022 Oct_2022 Nov_2022 Dec_2022 Jan_2023 Feb_2023 Mar_2023 Apr_2023 May_2023 June_2023
+1 0 0 1 9 8 7 1 4 11 22
+2 11 3 41 242 104 78 44 86 244 147
+3 3 5 17 53 27 43 6 12 90 43 ",header=TRUE)
+barplot(as.matrix(data2),main="Confirmed cases Vs Age categories",beside=TRUE,col=c("green","blue","purple"))
+barplot(as.matrix(data2),main="Confirmed cases Vs Age categories",beside=TRUE,col=c("green","blue","purple"))
+legend("topleft", c("Less than 15 years","15-49 years","Above 50"),cex
+= 1.3,bty="n",fill = c("green","blue","purple"))
+
+```
+
+```{r}
+months<-c("Sept_2022","Oct_2022","Nov_2022","Dec_2022", "Jan_2023","Feb
+_2023","Mar_2023","Apr_2023","May_2023","June_2023")
+Confirmed_covid<-c(14,8,59,304,139,128,51,102,345,212)
+plot(Confirmed_covid, type = "l",pch=21, col = "red",ylim=c(0,350),
+xaxt="n", ylab = "Number of patients ",
+main = "Confirmed cases Vs treatment ")
+treatment<- c(12,0,26,217,104,57,12,47,23,20)
+lines(treatment, col="blue",lty=2)
+legend("topleft", legend=c("Received treatment", "Confirmed"),cex=0.5,
+fill = c("blue","red"))
+axis(1,at=1:10,lab=c("Sept_2022","Oct_2022","Nov_2022","Dec_2022", "Jan
+_2023","Feb_2023","Mar_2023","Apr_2023","May_2023","June_2023"))
+```
+```{r}
+months<-c("sept_2022","Oct_2022","Nov_2022","Dec_2022", "Jan_2023","feb
+_2023","Mar_2023","Apr_2023","May_2023", "June_2023")
+number_of_test<-c(1709, 1018,
+3607,23788,6567,20113,10248,15152,11834,
+7891)
+plot(number_of_test, type = "o", col = "blue",ylim=c(0,24000),
+xaxt="n", ylab = "Number of Test",
+main = "COVID 19 Test")
+axis(1,at=1:10,lab=c("Sept_2022","Oct_2022","Nov_2022","Dec_2022", "Jan
+_2023","Feb_2023","Mar_2023","Apr_2023","May_2023","June_2023"))
+
+```
+#### ggplot2
+ggplot2 provides a set of tools that allows you to visualize complex data sets in a new creative way -some work need some packages to get done. -some of the graph
+are created using R’s base graphics system
+###### Library ggplot2
+
+```{r}
+###install.packages("ggplot2")
+library(ggplot2)
+```
+
+```{r}
+data(mtcars)
+#dotchart(mtcars$mpg,labels=row.names(mtcars),ce#x = 0.,main="miles per Gallon of car #model",xlab="MPG")table(mtcars$cyl)
+
+```
+```{r}
+#barplot(mtcars$cyl)
+barplot(table(mtcars$cyl),main="Distribution of car Cylinder counts",xlab="Number of cylinders",ylab = "Number of cars")
+
+```
+```{r}
+barplot(table(mtcars$cyl),main="Distribution of car Cylinder counts",xlab="Number of cylinders",ylab = "Number of cars",horiz=TRUE)
+
+```
+```{r}
+plot(mtcars$mpg~mtcars$wt,main="Automobile Data",xlab="Weight",ylab=" M
+iles per Gallon")
+
+```
+```{r}
+plot(mtcars$mpg~mtcars$wt,main="Automobile Data",xlab="Weight",ylab=" M
+iles per Gallon")
+plot(mtcars$mpg~mtcars$wt,pch=17,main="Automobile Data",xlab="Weight",ylab=" Miles per Gallon")
+
+```
+```{r}
+plot(mtcars$mpg~mtcars$wt,pch=21,main="Automobile Data",xlab="Weight",ylab=" Miles per Gallon")
+
+```
+```{r}
+#### in ggplot2, plots are created by chaining together function using (+)sign. Each function modify the plot created upto that poin
+library(ggplot2)
+ggplot(data=mtcars, aes(x=wt,y=mpg))+geom_point()+
+labs(title = "Automobile Data",x="Weight",y="Miles per Galon")
+```
+```{r}
+ggplot(data=mtcars, aes(x=wt,y=mpg))+geom_point(pch=17,color="blue",size=1)+
+geom_smooth(method="lm",color="green")+
+labs(title = "Automobile Data",x="Weight",y="Miles per Galon")
+## `geom_smooth()` using formula = 'y ~ x'
+
+```
+```{r}
+f0<-ggplot(data=mtcars, aes(x=wt,y=mpg))+geom_point(shape=24, fill=1,size=1)+
+geom_smooth(method="lm",color="blue")
+f0
+## `geom_smooth()` using formula = 'y ~ x'
+
+```
+```{r}
+f1<-f0+theme_bw()
+f1
+## `geom_smooth()` using formula = 'y ~ x'
+
+
+```
+```{r}
+f2<-f1+
+theme(panel.grid = element_line(linetype = "dotted",color = "Black"))
+f2
+## `geom_smooth()` using formula = 'y ~ x'
+```
+```{r}
+data(mtcars)
+mtcars$am<-factor(mtcars$am, levels =c(0,1),
+labels= c("Automatic","Manual"))
+mtcars$vs<-factor(mtcars$vs, levels =c(0,1),
+labels=c("V-Engine","Straight Engine"))
+mtcars$cyl<-factor(mtcars$cyl)
+ggplot(data=mtcars,aes(x=hp,y=mpg,shape=cyl,color=cyl))+
+geom_point(size=3)+
+facet_grid(vs~am)+
+labs(title = "Automobile Data by Engine Type",x="HorsePower",y="Miles
+per Gallon")
+
+```
+```{r}
+data(singer,package="lattice")
+ggplot(singer,aes(x=voice.part,y=height))+geom_boxplot()
+```
+#cbind and rbind
+###While combining column wise, the number of rows must match but row names areignored. when combining row-wise, both the number and the names of columns must match.
+```{r}
+data2<- data.frame(x=1:3, y=c("a","b","c"))
+str(data2)
+```
+```{r}
+(cbind(data2,data.frame(z=3:1)))
+```
+```{r}
+(rbind(data2,data.frame(x=10,y="z")))
+```
+# Create another Variable
+
+```{r}
+data_class<-read.table("E:/My documents-erneste/AUCA/R programming/class_data.txt")
+variable.names(data_class)
+```
+
+```{r}
+head(data_class,n=5)
+```
+```{r}
+tail(data_class)
+```
+
+```{r}
+data_class[,1]
+```
+```{r}
+summary(data_class$V2)
+```
+```{r}
+length(data_class$V2)
+```
+```{r}
+data_class[,-1]
+```
+```{r}
+# Convert a 'character' column to 'numeric'
+data_class$V1 <- as.integer(data_class$V1)
+data_class$V2 <- as.integer(data_class$V2)
+```
+
+```{r}
+attach(data_class)
+(BMI<-V2/(V1/100)^2)
+```
+```{r}
+(BMI<-round(V2/(V1/100)^2,digit=1))
+```
+```{r}
+head(cbind(data_class,BMI))
+```
+```{r}
+tail(cbind(data_class,BMI),n=10)
+```
+```{r}
+detach(data_class)
+```
+# SUMMARY OF BMI
+```{r}
+summary(BMI)
+```
+
+```{r}
+hist(data_class$V2)
+```
+```{r}
+hist(data_class$V2,col = "blue",main = "Sample Histogram")
+```
+```{r}
+stem(BMI,scale=2)
+```
+# Subsetting
+####Use of $, []. or [[]]
+#########Creation of leadership data Interest: How men and women differ in the way theylead their organizations. 5 questions were asked in this study. Example of thequestion: Do men and women in management position differ in the degree to whichthey defer to superiors? 1: strongly disagree, 2: disagree, 3:neither agree nordisagree,4: agree, 5: strongly agree
+```{r}
+manager <- c(1,2,3,4,5)
+country<- c("US","US","UK","UK","UK")
+gender<-c("M","F","F","M","F")
+age<-c(32,45,25,39,99)
+q1<-c(5,3,3,3,2)
+q2<-c(4,5,5,3,2)
+q3<-c(5,2,5,4,1)
+q4<-c(5,5,5,NA,2)
+q5<-c(5,5,2,NA,1)
+leadership<-data.frame(manager,country, gender, age, q1,q2,q3,q4,q5, stringsAsFactors = FALSE)
+leadership<-data.frame(manager,country, gender, age, q1,q2,q3,q4,q5)
+str(leadership)
+```
+```{r}
+names(leadership)
+```
+#Missing value
+```{r}
+leadership$age[leadership$age==99]<-NA
+leadership$agecat[leadership$age >75]<-"Elder"
+leadership$agecat[leadership$age>=35 & leadership$age<=75]<-"Middle Aged"
+leadership$agecat[leadership$age <35]<- "Young"
+```
+
+# One way to handle missing value
+##### Deleting all observations with missing data ( Listwise deletion) is one of the severalmethods of handling incomplete datasets. Note: You can also replacing the missingvalue by the average of the remaining data.
+```{r}
+is.na(leadership[,5:9])
+```
+```{r}
+newdata<-na.omit(leadership)
+newdata
+```
+
+```{r}
+order(leadership$age)
+```
+```{r}
+newdata2<-leadership[order(leadership$age),]
+```
+
+# Merging data sets
+##### To merge two data frame horizontally, you use merge() function. In most cases, twodata frames are joined by one or more common key variables. -example 1:merge(dataframeA, dataframeB,by=“ID”) -example 2:merge(dataframeA,dataframeB, by=c(“ID”,“country”))the second merge the two dataframes by ID and countryTo join two data frame( datasets) vertically, use rbind() function: Note that the twodata set must have the same variables
+```{r}
+newdata3<-leadership[,c(5:9)]
+myvars<-c("q1","q2","q3","q4","q5")
+newdata3<-leadership[myvars]
+newdata4<-leadership[,c(-1,-2)]
+newdata4<-leadership[,-(1:5)]
+newdata5<-leadership[,c(-1,-7)]
+leadership[[4]]
+```
+```{r}
+leadership$age
+```
+```{r}
+newdata6<-leadership[c(-1,-3),]
+newdata6<-leadership[c(2,4,5),]
+newdata7<-subset(leadership,age>=35|age<24,select=c(q1,q2,q3,q4,q5))
+attach(leadership)
+```
+```{r}
+#newdata 7<-leadership[gender="M" & age>30,]
+newdata7<-leadership[gender=="M" & age>30,]
+detach(leadership)
+```
+```{r}
+#install.packages("nycflights13")
+#install.packages("tidyverse")
+library(nycflights13)
+## Warning: package 'nycflights13' was built under R version 4.2.3
+#install.packages("dplyr")
+library(dplyr)
+## Warning: package 'dplyr' was built under R version 4.2.3
+##
+## Attaching package: 'dplyr'
+## The following objects are masked from 'package:stats':
+##
+## filter, lag
+## The following objects are masked from 'package:base':
+##
+## intersect, setdiff, setequal, union
+#library(tidyverse)
+```
+# The function filter()
+#rm(list = ls())
+```{r}
+str(flights)
+```
+```{r}
+#attach(flights)
+jan<-filter(flights,month==1)
+jan
+```
+```{r}
+dec25<-filter(flights,month==12, day==25)
+dec25
+```
+```{r}
+jan_dec<-filter(flights,month==1|month==12)
+jan_dec
+```
+```{r}
+data_10<-arrange(flights,year,month,day)
+arrange(flights,desc(arr_delay))
+```
+```{r}
+time_var<-select(flights, year,month, day)
+select(flights, year:day)
+```
+```{r}
+select(flights,-(year:day))
+```
+# The function mutate
+### This is useful in adding a new Variable
+```{r}
+## create a small data set
+flights2<-select(flights,year:day,ends_with("delay"),distance,air_time)
+(mutate(flights2,gain=arr_delay-dep_delay,
+speed=distance/air_time*60))
+```
+
+# CONDITIONAL STATEMENT IN R
+######### SIMPLE FUNCTION IN R
+```{r}
+f<-function(x) x^2
+formals(f)
+```
+```{r}
+body(f)
+```
+```{r}
+environment(f)
+```
+# ifelse(test,yes,No)
+```{r}
+pvalues<-c(.867,0.0054,0.0018,0.1572,0.0183,0.5386)
+results<-ifelse(pvalues<0.05,"Significant"," Not significant")
+results
+```
+```{r}
+x<-runif(1,0,10)
+if(x>3){
+y<-10
+}else {
+y<-0
+}
+```
+# The value of y is a set depending on whether x>3 or not. This can also be achieved BY
+```{r}
+y<-if (x>3){
+10
+}else {
+0
+}
+```
+
+# For usage
+```{r}
+for(i in 1:10){
+print(i) # will print values from 1 up to 10
+}
+```
+```{r}
+x<-c("a","b","c","d")
+x[3] # will print value at index 2
+```
+```{r}
+for(i in 1:5){
+print(x[i])
+}
+```
+```{r}
+for(i in 1:5)print(1:i)
+```
+```{r}
+for(i in 5:1)print(1:i)
+```
+# while loops
+## It begins by testing a condition, if it is true, then they execute the loop body. once theloop body is executed, the condition is tested again, until the condition is false. afterwhich the loop exits.
+```{r}
+count<-1
+while (count<10){
+print(count)
+count<-count+1
+}
+```
+```{r}
+z<-5
+set.seed(1)
+while(z>= 3 && z<=10){
+coin<-rbinom(1,1,0.5)
+if (coin==1){
+z=z+1
+} else {
+z<-z-1
+}
+}
+print(z)
+```
+# next, break
+## This is used to skip an iteration of a loop
+
+```{r}
+for (i in 1:100){
+print(1:i)
+if (i>20){
+break
+}
+}
+```
+
+# FUNCTION DECLARATION 
+```{r}
+f<-function(x,y){
+result<-x+(2*y)+3
+return(result)
+}
+f(2,3)
+```
+# Applying functions to matrices and data frame.
+```{r}
+a<-4
+sqrt(4)
+```
+```{r}
+b<- c(1,243,5.754,2.987)
+round(b)
+```
+```{r}
+c<-matrix(runif(12),nrow=3)
+c
+```
+```{r}
+log(c)
+```
+
+```{r}
+mean(c)
+```
+# lappy function
+# lapply() takes three inputs:,x,a list,a function, and…, It applies to each element of thelist and returns a new list. lapply(x,f,…). It is called function because it takes functionas an argument. Assume we have a data frame df. instead of assigning the result pflappliy() to df, we will assign them to df[] to ensure we get a data frame.
+```{r}
+fix_missing<-function(x){
+x[x==-99]<-NA
+x
+}
+function1<-function(x){
+x^2
+}
+curve(function1,-4,4)
+```
+
+# sapply
+## sapply() and vapply(), variants of lapply() that produces vectors,matrices, andarrays as Output, instead of lists map(), and mapply which iterate over multipleinput data structures in parallel
+
+```{r}
+str(Titanic)
+```
+
+```{r}
+View(Titanic)
+apply(Titanic,c(1,2),sum )
+```
+
+```{r}
+options(digits = 2)
+apply(Titanic,c(1,2),sum)[3:4,]
+```
+
+```{r}
+apply(Titanic,c(1,4),sum)[3:4,]
+```
+
+```{r}
+apply(Titanic,c(1,2,4),sum)
+```
+# apply(Titanic,c(1,2,4),sum)[3:4,]
+```{r}
+apply(Titanic,c(1,2,4),sum)[3:4,,]
+```
+
+```{r}
+ftable(apply(Titanic,c(1,4,2),sum)[3:4,,])
+```
+
+```{r}
+ftable(apply(Titanic,c(1,4,2),sum)[3:4,,])[1:2,]
+```
+
+```{r}
+ftable(apply(Titanic,c(1,4,2),sum)[3:4,,])[3:4,]
+```
+
+```{r}
+digit=2
+prop.table(ftable(apply(Titanic,c(1,4,2),sum)[3:4,,])[1:2,], margin = 2)
+```
+
+```{r}
+prop.table(ftable(apply(Titanic,c(1,4,2),sum)[3:4,,])[3:4,], margin = 2)
+```
+
+```{r}
+matrix(prop.table(ftable(apply(Titanic,c(1,4,2),sum)[3:4,,])[3:4,],margin = 2),nrow = 2, dimnames = list(dimnames(Titanic)$Survived,dimnames
+(Titanic)$Sex))
+```
+```{r}
+matrix(prop.table(ftable(apply(Titanic,c(1,4,2),sum)[3:4,,])[3:4,], margin = 2),nrow = 2, dimnames = list(dimnames(Titanic)$Survived,dimnames
+(Titanic)$Sex))
+```
+
+### Create dataset
+```{r}
+Student<-c("John ncuti", "Angela bakame", "Bruce wizeye","Alexis aganze
+", "claude Rukundo", "Joel Kagabo", "Mary ineza")
+Math<-c(600,412,358,495,512,410,522)
+Science<-c(95,99,80,82,75,89,77)
+English<-c(25,22,18,20,29,30,27)
+roster<-data.frame(Student,Math,Science,English,stringsAsFactors = FALSE)
+```
+
+### standardize variables and obtains the performance scores because they are reported on different scale( With widely differing means and standard deviations, we need to make them comparable before we combine them.)
+
+```{r}
+z<-scale(roster[,2:4])
+```
+
+### performance of each students using rowmeans and adding them to roster using cbind()
+```{r}
+score<-apply(z,1,mean)
+roster<-cbind(roster,score)
+```
+
+### Grades the students: quantile function gives the percentile rank of each student's performance score check the cutoff of A
+
+```{r}
+roster$grade[score>=y[1]]<-"A"
+roster$grade[score<y[1]&score>=y[2]]<-"B"
+roster$grade[score<y[2]& score>=y[3]]<-"C"
+roster$grade[score<y[3]& score>=y[4]]<-"D"
+roster$grade[score<y[4]]<-"F"
+```
+
+#### Dealing with names
+```{r}
+name<-strsplit((roster$Student),"")
+lastname<-sapply (name,"[",2)
+firstname<-sapply(name,"[",1)
+roster<-cbind(firstname, lastname,roster[,-1])
+roster<-roster[order(lastname,firstname),]
+roster
+```
+#Aggregation and reshaping
+#transpose
+```{r}
+cars<-mtcars[1:5, 1:4]
+cars
+```
+
+#Mazda RX4 Mazda RX4 Wag Datsun 710 Hornet 4 Drive Hornet Sport about MPG
+```{r}
+t(cars)
+```
+
+#aggregate data
+##aggregate() collapse data in R using one or more by variables and a defined function
+```{r}
+options(digits=3)
+attach(mtcars)
+aggdata<-aggregate(mtcars,by=list(cyl,gear),FUN=mean,na.rm=TRUE)
+```
+
+#Reshape
+##Step 1: install the package reshape2 step 2: melt data step 3: Cast the melted data any shape you desireDuring the cast, you can aggregate the data with any function you wish
+
+```{r}
+id<-c(1,1,2,2)
+time<-c(1,2,1,2)
+x1<-c(5,3,6,2)
+x2<-c(6,5,1,4)
+mydata<-data.frame(id,time,x1,x2)
+```
+
